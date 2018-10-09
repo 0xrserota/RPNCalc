@@ -1,0 +1,61 @@
+/*
+ *
+ *  COMP 15 Project 1 - CalcYouLater
+ *
+ *  README
+ *  Explanation of my CalcYouLater program
+ *  Modified By (UTLN): rserot01
+ *           On       : 10/14/2017
+ *
+ */
+
+
+
+ A.	Title and Author
+
+ 	Title: Project 1 - CalcYouLater
+ 	Author: Ravi Serota (rserot01)
+
+ B. Purpose
+
+ 	The purpose of the CalcYouLater program is to create a functional Reverse Polish Notation Calculator similar the the "dc" calculator in Unix operating systems.
+ 	It uses a stack to store data, and can perform comparisons, basic math operations, and basic stack manipulations.
+
+ C. Acknowledgements
+
+ 	Gavin Smith and George West, two fellow Comp 15 students, helped me talk through how to think about the algorithm for the codeBlockParser function, and also discussed function declaration and other basic syntax with me. I used the istringstream tutorial provided by Mark Sheldon on the assignment page for help with stringstreams.
+
+ D. Files
+
+ 	DatumStack.h       Contains the class definition for the DatumStack class
+ 	DatumStack.cpp     Contains the class implementation for the DatumStack class
+ 	testDatumStack.cpp A program that tests the DatumStack functionality
+ 	RPNCalc.h          Contains the class definition for the RPNCalc class
+ 	RPNCalc.cpp        Contains the class implementation for the RPNCalc class
+ 	testRPNCalc.cpp    A program that tests the RPNCalc functionality
+ 	main.cpp           Main function for RPNCalc
+ 	Makefile           A makefile that builds CalcYouLater
+ 	README			   The README file for this assignment	
+
+ E. Compile and Run
+
+ 	To compile and link, use "make" from the terminal. This should build the program using the makefile provided. To run CalcYouLater, type ./CalcYouLater and press enter. The calculator should be ready to accept input. 
+
+ F. Data Structures and Algorithms
+
+ 	The stack data structure in the DatumStack class is implemented using a doubly-linked list, which gives the advantage over a singly-linked list of being able to change the previous node in the list, which streamlines certain operations, like pop. Each node of the linked list is struct that contains a next and previous node pointer, as well as a Datum pointer that points to the data assigned to the node.
+
+ 	The codeBlockParser function uses a matching algorithm that counts the open brackets using a counter variable and then decrements the same counter for each closing bracket until the count is 0, in which case the loop terminates. When not on a bracket, the algorithm adds the input string from the istream to a new string, which at is returned at the end of the function.
+
+
+ G. Testing Process
+
+ 	I made a testDatumStack.cpp file to test the DatumStack, which included several test functions and a main. I used the Datum.h function getInt to print the top of the stack in testing since datum cannot be printed directly.
+
+ 	I also wrote a test program for the RPNCalc called testRPNCalc.cpp, which tested the entire functionality of the RPNCalc. In this program, I called each of the commands using arbitrary input in RPNCalc and printed them to cout. I used this to determine whether each command functioned properly. I used the factorial file provided by Mark Sheldon to test the functionality of the file command in RPNCalc.
+
+
+ 	
+
+
+

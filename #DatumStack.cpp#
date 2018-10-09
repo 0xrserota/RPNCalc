@@ -1,0 +1,136 @@
+/*
+ *
+ *  COMP 15 Project 1 - CalcYouLater
+ *
+ *  DatumStack.cpp
+ *  DatumStack class implmentation
+ *  Modified By (UTLN): rserot01
+ *           On       : 10/05/2017
+ *
+ */
+
+#include "Datum.h"
+#include "DatumStack.h"
+#include <iostream>
+
+using namespace std;
+
+
+
+// Default Constructor
+DatumStack::DatumStack()
+{
+	basep = topp = NULL;
+}
+
+DatumStack::DatumStack(Datum dtArray[], int arraySize)
+{
+
+	Node *thisNode = new Node;
+	basep = thisNode;
+	thisNode -> prev = NULL;
+	cerr << "cerr" << endl;
+
+	for (int i = 0; i < arraySize; ++i)
+	{
+		thisNode -> dt = &dtArray[i];
+		cerr << "in for loop" << endl;
+		thisNode -> next  = new Node;
+		thisNode -> next -> prev = thisNode;
+		thisNode = thisNode -> next;
+
+	}
+
+	cerr << "2cerr" << endl;
+	thisNode = thisNode -> prev;
+	delete thisNode -> next;  // deletes unneeded last node
+	topp = thisNode;
+	thisNode -> next = NULL;
+}
+
+
+DatumStack::~DatumStack()
+{
+	Node *thisNode  = new Node;
+
+	while (thisNode != NULL)
+	{
+		thisNode = thisNode -> next;
+		delete thisNode -> prev;
+	}
+}
+
+
+bool DatumStack::isEmpty()
+{
+	if (basep == NULL and topp == NULL)
+		return true;
+
+	else 
+		return false;
+}
+
+
+int DatumStack::size()
+{
+	Node *thisNode = new Node;
+	thisNode = basep;
+	int i = 0;
+
+	while (thisNode != NULL)
+	{
+		++i;
+		thisNode = thisNode -> next;
+	}
+
+	return i;
+}
+
+void DatumStack::clear()
+{
+	Node *thisNode  = new Node;
+	thisNode = basep;
+
+	while (thisNode != NULL)
+	{
+		cerr << "clear cerr" << endl;
+		delete thisNode -> prev;
+		cerr << "after delete" << endl;
+		thisNode = thisNode -> next;
+	}
+	cerr << "after for" << endl;
+	topp = basep = NULL;
+}
+
+
+Datum DatumStack::top()
+{
+	if (isEmpty())
+		throw runtime_error("empty_stack");
+
+	else
+		return *(topp -> dt);
+}
+
+3
+void DatumStack::push(Datum datum)
+{
+	topp -> next = new Node;
+	*((topp -> next) -> dt) = datum;
+	topp = topp -> next;
+	topp -> next = NULL;
+}
+
+void DatumStack::pop()
+{
+	if (isEmpty())
+		throw runtime_error("empty_stack");
+
+	else
+	{	
+		topp = topp -> prev;
+		delete topp -> next;
+		topp -> next = NULL;
+	}
+}
+
